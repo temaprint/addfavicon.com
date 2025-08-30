@@ -1,0 +1,81 @@
+---
+---
+
+<footer class="bg-gray-900 dark:bg-black text-white py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <!-- Brand -->
+      <div class="col-span-1 md:col-span-2">
+        <div class="flex items-center space-x-3 mb-4">
+          <div class="w-8 h-8 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-lg flex items-center justify-center">
+            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M4 3a2 2 0 00-2 2v1.816a2 2 0 00.948 1.702l6.752 4.176a2 2 0 002.6 0l6.752-4.176A2 2 0 0020 6.816V5a2 2 0 00-2-2H4z"/>
+              <path d="M2 9.118l6.752 4.176a2 2 0 002.496 0L18 9.118v5.882a2 2 0 01-2 2H4a2 2 0 01-2-2v-5.882z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold">AddFavicon</h3>
+        </div>
+        <p class="text-gray-400 mb-6 max-w-md">
+          The modern way to generate professional favicon packages with dynamic switching capabilities.
+          Fast, secure, and completely free.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<!-- Dynamic Favicon Switching Script -->
+<script>
+  let isActive = true;
+  const activeFavicon = '/favicon-32x32.png';
+  const passiveFavicon = '/favicon-passive-32x32.png';
+
+  function updateFavicon() {
+    const link = document.querySelector("link[rel*='icon']");
+    if (link) {
+      link.href = isActive ? activeFavicon : passiveFavicon;
+    }
+  }
+
+  window.addEventListener('focus', () => {
+    isActive = true;
+    updateFavicon();
+  });
+
+  window.addEventListener('blur', () => {
+    isActive = false;
+    updateFavicon();
+  });
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const faqButtons = document.querySelectorAll('.faq-button');
+
+    faqButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const content = button.nextElementSibling;
+        const icon = button.querySelector('.faq-icon');
+        const isOpen = !content.classList.contains('hidden');
+
+        // Close all other FAQs
+        faqButtons.forEach(otherButton => {
+          if (otherButton !== button) {
+            otherButton.nextElementSibling.classList.add('hidden');
+            otherButton.querySelector('.faq-icon').classList.remove('rotate-180');
+          }
+        });
+
+        // Toggle current FAQ
+        if (isOpen) {
+          content.classList.add('hidden');
+          icon.classList.remove('rotate-180');
+        } else {
+          content.classList.remove('hidden');
+          icon.classList.add('rotate-180');
+        }
+      });
+    });
+  });
+</script>

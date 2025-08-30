@@ -1,0 +1,26 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import FaviconGenerator from '../components/FaviconGenerator.astro';
+import Features from '../components/Features.astro';
+import FAQ from '../components/FAQ.astro';
+import Footer from '../components/Footer.astro';
+
+const pageTitle = "AddFavicon - Professional Favicon Generator with Dynamic Switching";
+const pageDescription = "Generate professional favicon packages with active/passive state switching. Upload your images and get all favicon sizes, manifest files, and HTML code instantly. Free favicon generator with dynamic tab switching.";
+const pageKeywords = "favicon generator, favicon maker, website icons, apple touch icon, android icon, favicon package, dynamic favicon, tab switching favicon, professional favicon, free favicon generator, favicon sizes, manifest json, favicon html code";
+---
+
+<Layout 
+  title={pageTitle}
+  description={pageDescription}
+  keywords={pageKeywords}
+>
+  <Header />
+  <Hero />
+  <FaviconGenerator />
+  <Features />
+  <FAQ />
+  <Footer />
+</Layout>

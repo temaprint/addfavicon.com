@@ -1,0 +1,136 @@
+---
+---
+
+<section id="generator" class="py-20 bg-gray-50 dark:bg-gray-800/50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+        Generate Your Favicon Package
+      </h2>
+      <p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+        Upload your active and passive images, preview the results, and download your complete favicon package
+      </p>
+    </div>
+
+    <div class="max-w-4xl mx-auto">
+      <div id="favicon-app" class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 p-8">
+        <!-- Upload Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+          <!-- Active Favicon Upload -->
+          <div class="space-y-4">
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white flex items-center">
+              <span class="w-3 h-3 bg-accent-500 rounded-full mr-2"></span>
+              Active Favicon
+            </h3>
+            <div 
+              id="active-dropzone" 
+              class="dropzone border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-xl p-8 text-center hover:border-primary-400 dark:hover:border-primary-500 transition-all cursor-pointer bg-gray-50 dark:bg-gray-700/50"
+            >
+              <svg class="w-12 h-12 text-gray-400 dark:text-gray-500 mx-auto mb-4" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+                <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <p class="text-gray-600 dark:text-gray-400 mb-2">
+                <span class="font-medium">Click to upload</span> or drag and drop
+              </p>
+              <p class="text-sm text-gray-500 dark:text-gray-500">PNG, JPG, SVG up to 10MB</p>
+              <input type="file" id="active-input" class="hidden" accept="image/*">
+            </div>
+            <div id="active-preview" class="hidden">
+              <img id="active-preview-img" class="w-16 h-16 rounded-lg mx-auto border border-gray-200 dark:border-gray-600" alt="Active favicon preview">
+            </div>
+          </div>
+
+          <!-- Passive Favicon Upload -->
+          <div class="space-y-4">
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white flex items-center">
+              <span class="w-3 h-3 bg-gray-400 rounded-full mr-2"></span>
+              Passive Favicon <span class="text-sm text-gray-500 ml-2">(Optional)</span>
+            </h3>
+            <div 
+              id="passive-dropzone" 
+              class="dropzone border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-xl p-8 text-center hover:border-primary-400 dark:hover:border-primary-500 transition-all cursor-pointer bg-gray-50 dark:bg-gray-700/50"
+            >
+              <svg class="w-12 h-12 text-gray-400 dark:text-gray-500 mx-auto mb-4" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+                <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <p class="text-gray-600 dark:text-gray-400 mb-2">
+                <span class="font-medium">Click to upload</span> or drag and drop
+              </p>
+              <p class="text-sm text-gray-500 dark:text-gray-500">Shown when tab is inactive</p>
+              <input type="file" id="passive-input" class="hidden" accept="image/*">
+            </div>
+            <div id="passive-preview" class="hidden">
+              <img id="passive-preview-img" class="w-16 h-16 rounded-lg mx-auto border border-gray-200 dark:border-gray-600" alt="Passive favicon preview">
+            </div>
+          </div>
+        </div>
+
+        <!-- Generate Button -->
+        <div class="text-center mb-8">
+          <button 
+            id="generate-btn" 
+            class="px-8 py-4 bg-gradient-to-r from-primary-600 to-secondary-600 text-white font-semibold rounded-xl hover:from-primary-700 hover:to-secondary-700 transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+            disabled
+          >
+            <span id="generate-text">Upload Active Image to Start</span>
+            <svg id="generate-loading" class="hidden animate-spin w-5 h-5 ml-2 inline" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2Z"></path>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Results Section -->
+        <div id="results" class="hidden space-y-8">
+          <!-- Preview Grid -->
+          <div class="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-6">
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Preview</h3>
+            <div class="grid grid-cols-4 md:grid-cols-8 gap-4" id="preview-grid">
+              <!-- Preview items will be generated here -->
+            </div>
+          </div>
+
+          <!-- Download and Code -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Download Section -->
+            <div class="space-y-4">
+              <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Download Package</h3>
+              <button 
+                id="download-btn" 
+                class="w-full px-6 py-4 bg-accent-600 hover:bg-accent-700 text-white font-semibold rounded-xl transition-all duration-200 flex items-center justify-center space-x-2"
+              >
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+                <span>Download ZIP Package</span>
+              </button>
+              <p class="text-sm text-gray-500 dark:text-gray-400">
+                Contains all favicon sizes, manifest files, and switching script
+              </p>
+            </div>
+
+            <!-- HTML Code Section -->
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">HTML Code</h3>
+                <button 
+                  id="copy-btn" 
+                  class="px-4 py-2 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 font-medium rounded-lg transition-colors text-sm"
+                >
+                  Copy Code
+                </button>
+              </div>
+              <div class="bg-gray-900 dark:bg-black rounded-lg p-4 overflow-x-auto">
+                <pre id="html-code" class="text-sm text-gray-300 whitespace-pre-wrap">
+<!-- Favicon links will be generated here -->
+                </pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script is:inline src="/scripts/favicon-generator.js"></script>
