@@ -36,7 +36,7 @@
         </button>
         <div class="faq-content hidden px-6 pb-5">
           <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
-            Our unique feature allows you to have two different favicons: one when the browser tab is active (user is viewing your site) and another when it's inactive. This creates engaging micro-interactions that can grab attention when users have multiple tabs open, potentially bringing them back to your site.
+            Our unique feature allows you to have two different favicons: one when the browser tab is active (user is viewing your site) and another when it's inactive. The switching happens automatically using JavaScript that detects window focus/blur events. This creates engaging micro-interactions that can grab attention when users have multiple tabs open, potentially bringing them back to your site.
           </p>
         </div>
       </article>
@@ -50,7 +50,7 @@
         </button>
         <div class="faq-content hidden px-6 pb-5">
           <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
-            We generate all standard favicon sizes: 16×16, 32×32, 48×48, 64×64, 128×128, 180×180 (Apple Touch), 192×192 (Android), 256×256, and 512×512. This ensures compatibility across all browsers, devices, and platforms.
+            We generate all standard favicon sizes: 16×16, 32×32, 48×48, 64×64, 128×128, 180×180 (Apple Touch), 192×192 (Android Chrome), 256×256, and 512×512. Your download package also includes a multi-size favicon.ico file and an optimized favicon.svg for modern browsers.
           </p>
         </div>
       </article>
@@ -64,7 +64,7 @@
         </button>
         <div class="faq-content hidden px-6 pb-5">
           <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
-            After generation, you'll get a ZIP package containing all icon files, a manifest.json, and ready-to-use HTML code. Simply extract the images to your website's root directory and copy the provided HTML code into your page's &lt;head&gt; section.
+            After generation, you'll get a ZIP package containing all icon files (PNG and ICO formats), a manifest.json for PWA support, and ready-to-use HTML code. Simply extract the files to your website's root directory and copy the provided HTML code into your page's &lt;head&gt; section. If you're using active/passive favicons, the HTML includes a JavaScript snippet for automatic switching.
           </p>
         </div>
       </article>
@@ -78,7 +78,7 @@
         </button>
         <div class="faq-content hidden px-6 pb-5">
           <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
-            We support all common image formats including PNG, JPG, JPEG, SVG, and WebP. For best results, use PNG or SVG files with square dimensions and transparent backgrounds. Maximum file size is 10MB per image.
+            We support all common image formats including PNG, JPG, JPEG, GIF, BMP, WebP, and SVG. For best results, use PNG or SVG files with square dimensions and transparent backgrounds. SVG files are preserved in their original format when possible for crisp scaling. Maximum file size is 10MB per image.
           </p>
         </div>
       </article>
@@ -105,7 +105,9 @@
     const faqButtons = document.querySelectorAll('.faq-button');
 
     faqButtons.forEach(button => {
-      button.addEventListener('click', () => {
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+        
         const article = button.closest('article');
         const content = article.querySelector('.faq-content');
         const icon = button.querySelector('.faq-icon');
@@ -116,8 +118,13 @@
           if (otherButton !== button) {
             const otherArticle = otherButton.closest('article');
             const otherContent = otherArticle.querySelector('.faq-content');
-            otherContent.classList.add('hidden');
-            otherButton.querySelector('.faq-icon').classList.remove('rotate-180');
+            if (otherContent) {
+              otherContent.classList.add('hidden');
+            }
+            const otherIcon = otherButton.querySelector('.faq-icon');
+            if (otherIcon) {
+              otherIcon.classList.remove('rotate-180');
+            }
           }
         });
 
