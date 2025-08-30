@@ -1,6 +1,6 @@
 {
-  "name": "Your App",
-  "short_name": "App",
+  "name": "AddFavicon.com",
+  "short_name": "addfavicon ",
   "icons": [
     {
       "src": "/favicon-192x192.png",

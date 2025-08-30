@@ -348,7 +348,7 @@ class FaviconGenerator {
     html += `<meta name="theme-color" content="#3b82f6">\n\n`;
 
     if (hasPassive) {
-      html += `<!-- Dynamic Favicon Switching Script -->\n`;
+      html += `<!-- Favicon gen by addfavicon.com -->\n`;
       html += `<script>\n`;
       html += `  let isActive = true;\n`;
       html += `  const activeFavicon = '/favicon.ico';\n`;
