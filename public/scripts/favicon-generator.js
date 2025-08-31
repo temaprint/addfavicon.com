@@ -348,33 +348,30 @@ class FaviconGenerator {
     html += `<meta name="theme-color" content="#3b82f6">\n\n`;
 
     if (hasPassive) {
-      html += `<!-- Favicon gen by addfavicon.com -->\n`;
+      html += `<!-- Favicon switcher (active/passive) -->\n`;
       html += `<script>\n`;
-      html += `  let isActive = true;\n`;
-      html += `  const activeFavicon = '/favicon.ico';\n`;
-      html += `  const passiveFavicon = '/favicon-passive-32x32.png';\n`;
-      html += `  \n`;
+      html += `  const activeFavicon = "/favicon.ico";\n`;
+      html += `  const passiveFavicon = "/favicon-passive-32x32.png";\n\n`;
+      html += `  function setFavicon(url) {\n`;
+      html += `    document.querySelectorAll("link[rel='icon']").forEach(el => el.remove());\n`;
+      html += `    const link = document.createElement("link");\n`;
+      html += `    link.rel = "icon";\n`;
+      html += `    link.href = url + "?v=" + Date.now(); // cache-busting\n`;
+      html += `    document.head.appendChild(link);\n`;
+      html += `  }\n\n`;
       html += `  function updateFavicon() {\n`;
-      html += `    const link = document.querySelector("link[rel='icon'][href*='.ico']");\n`;
-      html += `    if (link) {\n`;
-      html += `      link.href = isActive ? activeFavicon : passiveFavicon;\n`;
-      html += `    }\n`;
-      html += `  }\n`;
-      html += `  \n`;
-      html += `  window.addEventListener('focus', () => {\n`;
-      html += `    isActive = true;\n`;
-      html += `    updateFavicon();\n`;
-      html += `  });\n`;
-      html += `  \n`;
-      html += `  window.addEventListener('blur', () => {\n`;
-      html += `    isActive = false;\n`;
-      html += `    updateFavicon();\n`;
-      html += `  });\n`;
-      html += `</script>`;
+      html += `    setFavicon(document.hidden ? passiveFavicon : activeFavicon);\n`;
+      html += `  }\n\n`;
+      html += `  document.addEventListener("visibilitychange", updateFavicon);\n`;
+      html += `  window.addEventListener("focus", updateFavicon);\n`;
+      html += `  window.addEventListener("blur", updateFavicon);\n\n`;
+      html += `  updateFavicon();\n`;
+      html += `</script>\n`;
     }
 
-    document.getElementById('html-code').textContent = html;
+    document.getElementById("html-code").textContent = html;
   }
+
 
   setupDownloadButton() {
     document.getElementById('download-btn').addEventListener('click', () => {
